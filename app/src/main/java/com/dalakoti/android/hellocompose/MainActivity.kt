@@ -19,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -33,7 +34,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            AnimateNumbers()
+            Column(
+                modifier = Modifier.fillMaxSize()
+                    .background(
+                        color = colorResource(id = R.color.dark_violet),
+                    )
+            ) {
+                LoyaltyPointsStepItem()
+                LoyaltyPointsStepItem()
+                LoyaltyPointsStepItem()
+            }
         }
     }
 }
+
