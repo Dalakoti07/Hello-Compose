@@ -56,9 +56,13 @@ fun MultipleAnimationUsingTransitions(){
         onClick = { selected = !selected },
         shape = RoundedCornerShape(8.dp),
         elevation = elevation,
-        modifier = Modifier.fillMaxWidth().padding(10.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
     ) {
-        Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)) {
             Text(text = "Hello, world!")
             // AnimatedVisibility as a part of the transition.
             transition.AnimatedVisibility(
