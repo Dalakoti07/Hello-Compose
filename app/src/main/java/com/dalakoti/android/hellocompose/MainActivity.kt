@@ -16,6 +16,7 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.dalakoti.android.hellocompose.awesome.AnimationPager
 import com.dalakoti.android.hellocompose.effects.bounceClick
 import com.dalakoti.android.hellocompose.effects.pressClickEffect
 import com.dalakoti.android.hellocompose.effects.rippleEffect
@@ -26,9 +27,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                MyCircularProgressBar()
-            }
+            AnimationPager()
         }
     }
 }
