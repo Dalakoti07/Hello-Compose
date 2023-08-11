@@ -50,6 +50,9 @@ fun AnimationPager(){
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        SimpleCircles()
+    }
+    add {
         MyPlayGround()
     }
     add {
