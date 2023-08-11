@@ -1,5 +1,8 @@
 package com.dalakoti.android.hellocompose.awesome
 
+import android.util.Log
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -12,6 +15,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -26,9 +30,11 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 private const val TAG = "SimpleCircles"
 
@@ -59,7 +65,57 @@ private val allAnimationsList=  mutableListOf<@Composable () -> Unit>().apply {
     add {
         RotatingCirclesPb(3)
     }
+    add{
+        NBallsBouncing(4)
+    }
+}
 
+@Composable
+fun NBallsBouncing(count: Int) {
+    var current by remember {
+        mutableStateOf(1)
+    }
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(key1 = Unit, block = {
+        scope.launch {
+            while (true){
+                delay(400)
+                current = if(current == count) 1 else current+1
+            }
+        }
+    })
+    Row(
+        modifier = Modifier.padding(
+            top = 100.dp,
+        )
+    ) {
+        repeat(count){
+            EachCircleBouncing(it+1,current,)
+        }
+    }
+}
+
+@Composable
+fun EachCircleBouncing(current: Int, selected: Int, size: Dp = 10.dp){
+    val offsetY by animateFloatAsState(
+        targetValue = (if(current == selected) (-10/2) else (
+            0
+        )).toFloat(),
+        label = "pbScale",
+        animationSpec = tween(
+            durationMillis = 200,
+            easing = FastOutSlowInEasing,
+        )
+    )
+    Box(
+        modifier = Modifier
+            .size(size)
+            .offset(y = offsetY.dp)
+            .background(
+                color = Color.Red,
+                shape = CircleShape
+            )
+    )
 }
 
 @Composable
@@ -79,8 +135,8 @@ fun RotatingCirclesPb(count: Int) {
                 top = 100.dp,
             )
             .rotate(
-            animatingDegree
-        )
+                animatingDegree
+            )
     ) {
         repeat(count){
             Box(modifier = Modifier
