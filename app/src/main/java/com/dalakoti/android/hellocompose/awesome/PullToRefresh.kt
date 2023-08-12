@@ -1,10 +1,8 @@
 package com.dalakoti.android.hellocompose.awesome
 
-import android.util.Log
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,26 +11,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -45,14 +35,12 @@ import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.dalakoti.android.hellocompose.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
-import java.lang.Float.max
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -90,7 +78,6 @@ fun PullToRefresh() {
     }
 
     val airplaneXPixels = (widthScreen * 0.2f)
-    // todo why its 1.2f?
     val airplaneYPixels = (heightOfRefreshView * 1.2f)
 
     val airplaneOffsetX = remember {
@@ -167,19 +154,19 @@ private fun onRefreshViewTranslated(
     dividerHeight: Animatable<Float, AnimationVector1D>
 ) {
     coroutineScope.launch {
-        val newScale = abs(heightOfRefreshView / max(1f,refreshViewCurrentHeight))
-        sideCloudScale.animateTo(kotlin.math.max(1f, min(1.55f, newScale)))
+        val newScale = abs(heightOfRefreshView / refreshViewCurrentHeight)
+        sideCloudScale.animateTo( min(1.55f, newScale))
     }
     coroutineScope.launch {
-        val newScale = abs(heightOfRefreshView / max(1f,refreshViewCurrentHeight))
-        centerCloudScale.animateTo(kotlin.math.max(1f, min(1.30f, newScale)))
+        val newScale = abs(heightOfRefreshView / refreshViewCurrentHeight)
+        centerCloudScale.animateTo(min(1.30f, newScale))
     }
     coroutineScope.launch {
-        val newAirplaneX = airplaneXPixels.times(abs(heightOfRefreshView / max(1f,refreshViewCurrentHeight)))
+        val newAirplaneX = airplaneXPixels.times(abs(heightOfRefreshView / refreshViewCurrentHeight))
         airplaneOffsetX.animateTo(min(newAirplaneX, widthScreen / 2.5f))
     }
     coroutineScope.launch {
-        val newAirplaneY = airplaneYPixels.times(abs(refreshViewCurrentHeight / max(1f,heightOfRefreshView)))
+        val newAirplaneY = airplaneYPixels.times(abs(refreshViewCurrentHeight / heightOfRefreshView))
         airplaneOffsetY.animateTo(kotlin.math.max(newAirplaneY, heightOfRefreshView / 2))
     }
     coroutineScope.launch {
@@ -196,7 +183,6 @@ private suspend fun upDownAirplaneMove(
     widthScreen: Float,
     coroutineScope: CoroutineScope
 ) {
-    Log.d(TAG, "upDownAirplaneMove: screen-width $widthScreen")
     val currentPlaneOffsetY = airplaneOffsetY.value
 
     repeat(10) {
@@ -350,13 +336,12 @@ private fun CloudPlaneComposable(
 
         it.CloudsBottom(cloudsZoom, centerCloud)
 
-        // todo what if we remove this?
-        it.ArrowsExpanding(dividerHeight)
+        // it.ArrowsExpanding(dividerHeight)
     }
 
 }
 
-@Composable
+/*@Composable
 private fun BoxScope.ArrowsExpanding(dividerHeight: Float) {
     val dividerHeightDp = with(LocalDensity.current) {
         dividerHeight.toDp()
@@ -391,7 +376,7 @@ private fun BoxScope.ArrowsExpanding(dividerHeight: Float) {
 
 
     }
-}
+}*/
 
 @Composable
 private fun BoxScope.CloudsBottom(
