@@ -123,6 +123,8 @@ fun PullToRefresh() {
             }, {
                 canAcceptTouch.value = false
 
+                // todo for actual api call we have to pass a boolean which would
+                //  call animateOffset with proper value to close the refresh view
                 upDownAirplaneMove(
                     airplaneOffsetY,
                     airplaneVerticalOffset,
