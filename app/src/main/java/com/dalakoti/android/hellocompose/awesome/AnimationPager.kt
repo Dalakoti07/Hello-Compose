@@ -18,34 +18,41 @@ import androidx.compose.ui.graphics.Color
 
 
 @Composable
-fun AnimationPager(){
+fun AnimationPager(rememberedComposeWindow: WindowInfo){
 
     var currentAnimation by remember{
         mutableStateOf(0)
     }
 
-    Box(
-        modifier = Modifier.fillMaxSize()
+    CompositionLocalProvider(
+        LocalWindow provides rememberedComposeWindow
     ) {
-        allAnimations[currentAnimation].invoke()
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            allAnimations[currentAnimation].invoke()
 
-        IconButton({
-            if (currentAnimation > 0) {
-                currentAnimation = currentAnimation.dec()
+            IconButton({
+                if (currentAnimation > 0) {
+                    currentAnimation = currentAnimation.dec()
+                }
+            }, modifier = Modifier
+                .align(Alignment.CenterStart)
+                .background(Color.White.copy(alpha = 0.4f,))) {
+                Icon(Icons.Default.ArrowBack, contentDescription = null)
             }
-        }, modifier = Modifier.align(Alignment.CenterStart).background(Color.White.copy(alpha = 0.4f,))) {
-            Icon(Icons.Default.ArrowBack, contentDescription = null)
-        }
 
-        IconButton({
-            if (currentAnimation < allAnimations.size.minus(1)) {
-                currentAnimation = currentAnimation.inc()
+            IconButton({
+                if (currentAnimation < allAnimations.size.minus(1)) {
+                    currentAnimation = currentAnimation.inc()
+                }
+            }, modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .background(Color.White.copy(alpha = 0.4f,))) {
+                Icon(Icons.Default.ArrowForward, contentDescription = null)
             }
-        }, modifier = Modifier.align(Alignment.CenterEnd).background(Color.White.copy(alpha = 0.4f,))) {
-            Icon(Icons.Default.ArrowForward, contentDescription = null)
         }
     }
-
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {

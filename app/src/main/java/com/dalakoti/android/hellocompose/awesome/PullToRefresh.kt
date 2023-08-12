@@ -1,5 +1,6 @@
 package com.dalakoti.android.hellocompose.awesome
 
+import android.util.Log
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.FastOutLinearInEasing
@@ -60,6 +61,8 @@ val yellow = Color(0xffefa92f)
 val green = Color(0xff079c6d)
 val red = Color(0xffe35050)
 
+private const val TAG = "PullToRefresh"
+
 @Composable
 fun PullToRefresh() {
     val canAcceptTouch = remember {
@@ -107,7 +110,7 @@ fun PullToRefresh() {
     Box(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colors.background)
+            .background(Color.Black)
     ) {
         CloudList(
             animateOffset,
@@ -164,19 +167,19 @@ private fun onRefreshViewTranslated(
     dividerHeight: Animatable<Float, AnimationVector1D>
 ) {
     coroutineScope.launch {
-        val newScale = abs(heightOfRefreshView / refreshViewCurrentHeight)
+        val newScale = abs(heightOfRefreshView / max(1f,refreshViewCurrentHeight))
         sideCloudScale.animateTo(kotlin.math.max(1f, min(1.55f, newScale)))
     }
     coroutineScope.launch {
-        val newScale = abs(heightOfRefreshView / refreshViewCurrentHeight)
+        val newScale = abs(heightOfRefreshView / max(1f,refreshViewCurrentHeight))
         centerCloudScale.animateTo(kotlin.math.max(1f, min(1.30f, newScale)))
     }
     coroutineScope.launch {
-        val newAirplaneX = airplaneXPixels.times(abs(heightOfRefreshView / refreshViewCurrentHeight))
+        val newAirplaneX = airplaneXPixels.times(abs(heightOfRefreshView / max(1f,refreshViewCurrentHeight)))
         airplaneOffsetX.animateTo(min(newAirplaneX, widthScreen / 2.5f))
     }
     coroutineScope.launch {
-        val newAirplaneY = airplaneYPixels.times(abs(refreshViewCurrentHeight / heightOfRefreshView))
+        val newAirplaneY = airplaneYPixels.times(abs(refreshViewCurrentHeight / max(1f,heightOfRefreshView)))
         airplaneOffsetY.animateTo(kotlin.math.max(newAirplaneY, heightOfRefreshView / 2))
     }
     coroutineScope.launch {
@@ -193,6 +196,7 @@ private suspend fun upDownAirplaneMove(
     widthScreen: Float,
     coroutineScope: CoroutineScope
 ) {
+    Log.d(TAG, "upDownAirplaneMove: screen-width $widthScreen")
     val currentPlaneOffsetY = airplaneOffsetY.value
 
     repeat(10) {
