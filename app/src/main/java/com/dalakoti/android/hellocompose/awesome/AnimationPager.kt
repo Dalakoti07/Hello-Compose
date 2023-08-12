@@ -59,6 +59,9 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        YahooWeatherAndSun()
+    }
+    add {
         Box(
             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
         ) {
