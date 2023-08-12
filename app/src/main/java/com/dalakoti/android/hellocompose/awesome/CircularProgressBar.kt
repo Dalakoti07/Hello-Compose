@@ -8,46 +8,42 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Preview
 @Composable
-fun GlowingProgressBar() {
+fun GlowingProgressBar(
+    size: Dp = 50.dp,
+) {
     val infiniteTransition = rememberInfiniteTransition(label = "circularRing")
     val angleAnimation by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearEasing),
+            animation = tween(1000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart,
         ), label = ""
     )
     Box(
         modifier = Modifier
-            .size(200.dp)
-            .padding(
-                all = 50.dp
-            )
+            .size(size)
     ) {
         // for outer circle, greyed part
         Canvas(modifier = Modifier.align(
             Alignment.Center
-        ).size(150.dp), onDraw = {
+        ).fillMaxSize(), onDraw = {
             drawCircle(
                 color = Color.DarkGray,
                 style = Stroke(
@@ -57,7 +53,7 @@ fun GlowingProgressBar() {
         })
         Canvas(modifier = Modifier.align(
             Alignment.Center
-        ).size(150.dp), onDraw = {
+        ).fillMaxSize(), onDraw = {
             drawArc(
                 color =
                 Color(0xfff9d71c),
@@ -68,7 +64,7 @@ fun GlowingProgressBar() {
                     StrokeJoin.Round,
                 ),
                 startAngle = angleAnimation,
-                sweepAngle = 360 / 4f,
+                sweepAngle = 360 / 8f,
                 useCenter = false
             )
         })
