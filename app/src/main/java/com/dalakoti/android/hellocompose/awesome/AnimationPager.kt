@@ -50,12 +50,15 @@ fun AnimationPager(){
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        PullToRefresh()
+    }
+    add {
         SimpleCircles()
     }
     add {
-        MyPlayGround()
+        NetflixSplashAnim()
     }
     add {
-        NetflixSplashAnim()
+        MyPlayGround()
     }
 }

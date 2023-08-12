@@ -204,20 +204,22 @@ fun DrawL(startL: Boolean, complete: () -> Unit) {
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             start2 = true
-        })
+        }, label = ""
+    )
     val width1 by animateDpAsState(
         if (start) 10.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     val size2 by animateDpAsState(
         if (start2) 10.dp else 0.dp,
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             complete()
-        })
+        }, label = ""
+    )
     val width2 by animateDpAsState(
         if (start2) 30.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     Column(horizontalAlignment = Alignment.Start) {
         // L
@@ -248,20 +250,22 @@ fun DrawF(isE: Boolean = false, startAnim: Boolean = false, completed: () -> Uni
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             start2 = true
-        })
+        }, label = ""
+    )
     val width1 by animateDpAsState(
         if (start) 10.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     val size2 by animateDpAsState(
         if (start2) 10.dp else 0.dp,
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             start3 = true
-        })
+        }, label = ""
+    )
     val width2 by animateDpAsState(
         if (start2) 20.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     val size3 by animateDpAsState(
         if (start3) 10.dp else 0.dp,
@@ -272,20 +276,22 @@ fun DrawF(isE: Boolean = false, startAnim: Boolean = false, completed: () -> Uni
             } else {
                 completed()
             }
-        })
+        }, label = ""
+    )
     val width3 by animateDpAsState(
         if (start3) 20.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     val size4 by animateDpAsState(
         if (start4) 10.dp else 0.dp,
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             completed()
-        })
+        }, label = ""
+    )
     val width4 by animateDpAsState(
         if (start4) 20.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     Row {
         // E
@@ -328,20 +334,22 @@ fun DrawT(startT: Boolean = false, complete: () -> Unit) {
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             start2 = true
-        })
+        }, label = ""
+    )
     val width1 by animateDpAsState(
         if (start) 30.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     val size2 by animateFloatAsState(
         if (start2) 1f else 0f,
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             complete()
-        })
+        }, label = ""
+    )
     val width2 by animateDpAsState(
         if (start2) 10.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         // T
@@ -367,30 +375,33 @@ private fun DrawN(completed: () -> Unit) {
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             startTwo = true
-        })
+        }, label = ""
+    )
     val width1 by animateDpAsState(
         if (startOne) 10.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     val size2 by animateFloatAsState(
         if (startTwo) 1f else 0f,
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             startThree = true
-        })
+        }, label = ""
+    )
     val width2 by animateDpAsState(
         if (startTwo) 10.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     val size3 by animateFloatAsState(
         if (startThree) 1f else 0f,
         animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
         finishedListener = {
             completed()
-        })
+        }, label = ""
+    )
     val width3 by animateDpAsState(
         if (startThree) 10.dp else 0.dp,
-        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing),
+        animationSpec = tween(TOTAL_NF_TIME, easing = LinearEasing), label = "",
     )
     LaunchedEffect(Unit) {
         startOne = true
