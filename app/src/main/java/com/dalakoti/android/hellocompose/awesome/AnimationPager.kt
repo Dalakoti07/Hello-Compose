@@ -59,6 +59,13 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        Box(modifier = Modifier.fillMaxSize().background(
+            color = Color.Black,
+        ), contentAlignment = Alignment.Center,){
+            LikeAnimation()
+        }
+    }
+    add {
         Github404()
     }
     add {
