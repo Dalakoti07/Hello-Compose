@@ -59,6 +59,11 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        Box(Modifier.fillMaxSize()) {
+            MenuToClose(Modifier.align(Alignment.Center))
+        }
+    }
+    add {
         Box(Modifier.fillMaxSize().background(
             color = Color.Black,
         )) {
