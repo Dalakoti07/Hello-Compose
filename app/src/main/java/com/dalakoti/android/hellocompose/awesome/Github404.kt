@@ -12,18 +12,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
 import com.dalakoti.android.hellocompose.R
 
 @Composable
@@ -58,8 +55,8 @@ fun Github404() {
     }
 
     val yFactor by infiniteTransition.animateFloat(
-        initialValue = 10f,
-        targetValue = -10f,
+        initialValue = 0f,
+        targetValue = 30f,
         animationSpec = infiniteRepeatable(
             animation = tween(
                 durationMillis = 2000, delayMillis = 500, easing = LinearEasing,
@@ -75,15 +72,15 @@ fun Github404() {
     ) {
         Box(Modifier.fillMaxSize()) {
             BackgroundImageGithub(bgImageScaleFactor)
-            Looking404(githubAvatarX.value, githubAvatarY.value.plus(yFactor))
+            Looking404(githubAvatarX.value, githubAvatarY.value)
             HomeOne(githubAvatarX.value.plus(190), githubAvatarY.value.minus(180))
             SpaceShipShadow(
                 githubAvatarX.value.plus(80),
-                githubAvatarY.value.plus(180).minus(yFactor),
+                githubAvatarY.value.plus(250).minus(yFactor),
                 yFactor
             )
             SpaceShip(githubAvatarX.value.plus(80), githubAvatarY.value.plus(30).minus(yFactor))
-            AvatarShadow(githubAvatarX.value.minus(180), githubAvatarY.value.plus(210), yFactor)
+            AvatarShadow(githubAvatarX.value.minus(180), githubAvatarY.value.plus(310).minus(yFactor), yFactor)
             GithubAvatar(githubAvatarX.value.minus(180), githubAvatarY.value.minus(yFactor))
         }
 
@@ -103,25 +100,6 @@ fun BackgroundImageGithub(bgImageScaleFactor: Float) {
     )
 }
 
-@Composable
-private fun HomeTwo(
-    githubAvatarX: Float,
-    githubAvatarY: Float
-) {
-    Image(
-        painter = painterResource(id = R.drawable.deserthome1),
-        contentDescription = null, modifier = Modifier
-            .offset {
-                IntOffset(
-                    githubAvatarX
-                        .toInt(),
-                    githubAvatarY
-                        .toInt()
-                )
-            }
-            .scale(1.5f)
-    )
-}
 
 @Composable
 private fun HomeOne(
@@ -240,6 +218,6 @@ private fun AvatarShadow(
                     githubAvatarY.toInt()
                 )
             }
-            .scale(1.8f + yFactor.times(0.02f))
+            .scale(1.1f + yFactor.times(0.02f))
     )
 }
