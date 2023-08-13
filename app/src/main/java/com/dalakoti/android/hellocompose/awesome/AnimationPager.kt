@@ -59,6 +59,9 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        Github404()
+    }
+    add {
         TwitterSplashAnimation()
     }
     add {
