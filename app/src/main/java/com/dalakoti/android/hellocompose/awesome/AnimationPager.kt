@@ -60,20 +60,30 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
         Box(Modifier.fillMaxSize()) {
+            StarDisplay()
+        }
+    }
+    add {
+        Box(Modifier.fillMaxSize()) {
             MenuToClose(Modifier.align(Alignment.Center))
         }
     }
     add {
-        Box(Modifier.fillMaxSize().background(
-            color = Color.Black,
-        )) {
+        Box(
+            Modifier
+                .fillMaxSize()
+                .background(
+                    color = Color.Black,
+                )) {
             ChatMessageReaction(Modifier.align(Alignment.Center))
         }
     }
     add {
-        Box(modifier = Modifier.fillMaxSize().background(
-            color = Color.Black,
-        ), contentAlignment = Alignment.Center,){
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .background(
+                color = Color.Black,
+            ), contentAlignment = Alignment.Center,){
             LikeAnimation()
         }
     }
