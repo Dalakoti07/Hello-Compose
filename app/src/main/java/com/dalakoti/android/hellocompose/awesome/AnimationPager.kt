@@ -2,6 +2,7 @@ package com.dalakoti.android.hellocompose.awesome
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -59,7 +60,7 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
-        Box(Modifier.fillMaxSize()) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center,) {
             StarDisplay()
         }
     }
