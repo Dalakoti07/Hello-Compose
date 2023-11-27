@@ -1,8 +1,7 @@
-package com.dalakoti.android.hellocompose.awesome
+package com.dalakoti.android.hellocompose.examples
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -14,6 +13,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.dalakoti.android.hellocompose.awesome.ChatMessageReaction
+import com.dalakoti.android.hellocompose.awesome.Github404
+import com.dalakoti.android.hellocompose.awesome.GlowingProgressBar
+import com.dalakoti.android.hellocompose.awesome.LikeAnimation
+import com.dalakoti.android.hellocompose.awesome.LocalWindow
+import com.dalakoti.android.hellocompose.awesome.MenuToClose
+import com.dalakoti.android.hellocompose.awesome.MyPlayGround
+import com.dalakoti.android.hellocompose.awesome.NetflixSplashAnim
+import com.dalakoti.android.hellocompose.awesome.PullToRefresh
+import com.dalakoti.android.hellocompose.awesome.SimpleCircles
+import com.dalakoti.android.hellocompose.awesome.StarDisplay
+import com.dalakoti.android.hellocompose.awesome.TwitterSplashAnimation
+import com.dalakoti.android.hellocompose.awesome.WindowInfo
+import com.dalakoti.android.hellocompose.awesome.YahooWeatherAndSun
 
 
 @Composable
@@ -59,11 +72,6 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
-    add {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center,) {
-            StarDisplay()
-        }
-    }
     add {
         Box(Modifier.fillMaxSize()) {
             MenuToClose(Modifier.align(Alignment.Center))
