@@ -16,13 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.dalakoti.android.hellocompose.awesome.MenuToClose
+import com.dalakoti.android.hellocompose.basics.BasicLayouts
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add{
-        Box(Modifier.fillMaxSize()) {
-            MenuToClose(Modifier.align(Alignment.Center))
-        }
+        BasicLayouts()
     }
 }
 
