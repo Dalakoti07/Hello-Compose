@@ -17,8 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.dalakoti.android.hellocompose.basics.BasicLayouts
+import com.dalakoti.android.hellocompose.basics.HorizontalPagerExample
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
+    add{
+        HorizontalPagerExample()
+    }
     add{
         BasicLayouts()
     }
