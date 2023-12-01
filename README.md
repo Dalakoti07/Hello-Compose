@@ -1,6 +1,9 @@
-### Contains various samples for 
-- composables 
+### Contains various samples for
+- composables
 - animations
+
+![img.png](media/banner.png)
+
 
 Some Animations from this [repo](git@github.com:Dalakoti07/ComposeAnimationsPlayground.git)
 

@@ -21,9 +21,6 @@ import com.dalakoti.android.hellocompose.basics.HorizontalPagerExample
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add{
-        HorizontalPagerExample()
-    }
-    add{
         BasicLayouts()
     }
 }
