@@ -19,14 +19,17 @@ import androidx.compose.ui.graphics.Color
 import com.dalakoti.android.hellocompose.basics.*
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
-    add{
-        BasicLineDraws()
+    add {
+        BouncingBall()
     }
     add {
         SimpleSinWaveUsingDots()
     }
     add {
         SimpleSinWave()
+    }
+    add{
+        BasicLineDraws()
     }
 }
 
