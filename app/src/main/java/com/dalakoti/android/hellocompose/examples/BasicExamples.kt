@@ -17,10 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.dalakoti.android.hellocompose.basics.BasicLineDraws
+import com.dalakoti.android.hellocompose.basics.SimpleSinWave
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add{
         BasicLineDraws()
+    }
+    add {
+        SimpleSinWave()
     }
 }
 
@@ -32,7 +36,8 @@ fun BasicExamples() {
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
     ) {
         allExamples[currentExample].invoke()
 
