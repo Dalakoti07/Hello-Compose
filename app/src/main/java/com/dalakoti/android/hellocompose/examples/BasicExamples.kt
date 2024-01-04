@@ -16,12 +16,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.dalakoti.android.hellocompose.basics.BasicLineDraws
-import com.dalakoti.android.hellocompose.basics.SimpleSinWave
+import com.dalakoti.android.hellocompose.basics.*
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add{
         BasicLineDraws()
+    }
+    add {
+        SimpleSinWaveUsingDots()
     }
     add {
         SimpleSinWave()
