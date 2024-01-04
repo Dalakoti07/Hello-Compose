@@ -16,12 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.dalakoti.android.hellocompose.basics.BasicLayouts
-import com.dalakoti.android.hellocompose.basics.HorizontalPagerExample
+import com.dalakoti.android.hellocompose.basics.BasicLineDraws
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add{
-        BasicLayouts()
+        BasicLineDraws()
     }
 }
 

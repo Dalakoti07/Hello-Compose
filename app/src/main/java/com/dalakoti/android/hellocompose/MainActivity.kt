@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
+            /*val navController = rememberNavController()
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") {
                     HomePage(
@@ -58,7 +58,8 @@ class MainActivity : ComponentActivity() {
                         rememberedComposeWindow
                     )
                 }
-            }
+            }*/
+            BasicExamples()
         }
     }
 }
