@@ -20,6 +20,9 @@ import com.dalakoti.android.hellocompose.basics.*
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        CircularPathIllustration()
+    }
+    add {
         BouncingBall()
     }
     add {
