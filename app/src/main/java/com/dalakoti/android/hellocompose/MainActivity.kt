@@ -18,9 +18,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dalakoti.android.hellocompose.appBar.AppBarDemo
 import com.dalakoti.android.hellocompose.examples.AnimationPager
 import com.dalakoti.android.hellocompose.awesome.WindowInfo
 import com.dalakoti.android.hellocompose.examples.BasicExamples
@@ -29,7 +31,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            /*val navController = rememberNavController()
+            val navController = rememberNavController()
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") {
                     HomePage(
@@ -39,6 +41,9 @@ class MainActivity : ComponentActivity() {
                         onAnimationClick = {
                             navController.navigate("animations")
                         },
+                        appBarStuffClick = {
+                            navController.navigate("appbar")
+                        }
                     )
                 }
                 composable("basics") {
@@ -58,8 +63,10 @@ class MainActivity : ComponentActivity() {
                         rememberedComposeWindow
                     )
                 }
-            }*/
-            BasicExamples()
+                composable("appbar"){
+                    AppBarDemo()
+                }
+            }
         }
     }
 }
@@ -70,6 +77,7 @@ class MainActivity : ComponentActivity() {
 private fun HomePage(
     onBasicClick: () -> Unit = {},
     onAnimationClick: () -> Unit = {},
+    appBarStuffClick: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -82,7 +90,7 @@ private fun HomePage(
             modifier = Modifier.padding(it)
         ) {
             Card(
-                modifier = Modifier.padding(6.dp),
+                modifier = Modifier.padding(6.dp).fillMaxWidth(),
                 onClick = {
                     onBasicClick()
                 }
@@ -90,11 +98,12 @@ private fun HomePage(
                 Text(
                     text = "Basics", modifier = Modifier.padding(
                         6.dp,
-                    )
+                    ),
+                    fontSize = 20.sp,
                 )
             }
             Card(
-                modifier = Modifier.padding(6.dp),
+                modifier = Modifier.padding(6.dp).fillMaxWidth(),
                 onClick = {
                     onAnimationClick()
                 }
@@ -102,7 +111,21 @@ private fun HomePage(
                 Text(
                     text = "Animations", modifier = Modifier.padding(
                         6.dp,
-                    )
+                    ),
+                    fontSize = 20.sp,
+                )
+            }
+            Card(
+                modifier = Modifier.padding(6.dp).fillMaxWidth(),
+                onClick = {
+                    appBarStuffClick()
+                }
+            ) {
+                Text(
+                    text = "AppBar", modifier = Modifier.padding(
+                        6.dp,
+                    ),
+                    fontSize = 20.sp,
                 )
             }
         }
