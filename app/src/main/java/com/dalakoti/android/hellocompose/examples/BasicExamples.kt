@@ -1,10 +1,13 @@
 package com.dalakoti.android.hellocompose.examples
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -22,6 +25,13 @@ import com.dalakoti.android.hellocompose.pathExamples.PolygonPathExamples
 import com.dalakoti.android.hellocompose.pathExamples.TicketWaveComposable
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            JellyfishAnimation()
+        }else{
+            Text(text = "Not supported", color = Color.White,)
+        }
+    }
     add {
         TicketWaveComposable(modifier = Modifier)
     }
