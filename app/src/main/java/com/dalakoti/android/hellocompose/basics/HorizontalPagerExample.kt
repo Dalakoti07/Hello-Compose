@@ -55,7 +55,7 @@ fun HorizontalPagerExample() {
         )
     val itemCounts = 4
 
-    val pagerState = rememberPagerState(initialPage = 0)
+    val pagerState = rememberPagerState(pageCount = { 0 })
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(pagerState) {
@@ -68,7 +68,7 @@ fun HorizontalPagerExample() {
     }
 
     Column {
-        HorizontalPager(pageCount = 4, state = pagerState) { page ->
+        HorizontalPager(state = pagerState) { page ->
             // Our page content
             Image(
                 painter = items[page],

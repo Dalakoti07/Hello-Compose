@@ -17,8 +17,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.dalakoti.android.hellocompose.basics.*
+import com.dalakoti.android.hellocompose.pathExamples.CustomShapes
+import com.dalakoti.android.hellocompose.pathExamples.PolygonPathExamples
+import com.dalakoti.android.hellocompose.pathExamples.TicketWaveComposable
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        TicketWaveComposable(modifier = Modifier)
+    }
+    add{
+        CustomShapes()
+    }
+    add {
+        PolygonPathExamples()
+    }
     add {
         CircularPathIllustration()
     }
