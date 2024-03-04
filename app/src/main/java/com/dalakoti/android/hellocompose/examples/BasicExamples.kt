@@ -20,11 +20,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.dalakoti.android.hellocompose.basics.*
+import com.dalakoti.android.hellocompose.effects.AdvanceModifierDemo
 import com.dalakoti.android.hellocompose.pathExamples.CustomShapes
 import com.dalakoti.android.hellocompose.pathExamples.PolygonPathExamples
 import com.dalakoti.android.hellocompose.pathExamples.TicketWaveComposable
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        AdvanceModifierDemo()
+    }
     add {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             JellyfishAnimation()
