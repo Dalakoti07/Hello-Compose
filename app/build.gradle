@@ -68,4 +68,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.8.22"
 
     implementation "io.coil-kt:coil-compose:2.6.0"
+
+    implementation "androidx.compose.runtime:runtime-livedata:1.6.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.6.2"
 }
