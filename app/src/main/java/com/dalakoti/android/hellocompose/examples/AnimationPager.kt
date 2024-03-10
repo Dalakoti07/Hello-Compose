@@ -27,6 +27,7 @@ import com.dalakoti.android.hellocompose.awesome.StarDisplay
 import com.dalakoti.android.hellocompose.awesome.TwitterSplashAnimation
 import com.dalakoti.android.hellocompose.awesome.WindowInfo
 import com.dalakoti.android.hellocompose.awesome.YahooWeatherAndSun
+import com.dalakoti.android.hellocompose.awesome.water.WaterLevelAnimation
 
 
 @Composable
@@ -72,6 +73,9 @@ fun AnimationPager(rememberedComposeWindow: WindowInfo) {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        WaterLevelAnimation()
+    }
     add {
         Box(Modifier.fillMaxSize()) {
             MenuToClose(Modifier.align(Alignment.Center))
