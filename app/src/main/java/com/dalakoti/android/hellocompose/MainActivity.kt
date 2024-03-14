@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                         },
                         appBarStuffClick = {
                             navController.navigate("appbar")
-                        }
+                        },
                     )
                 }
                 composable("basics") {

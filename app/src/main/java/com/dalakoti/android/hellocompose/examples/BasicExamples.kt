@@ -27,6 +27,9 @@ import com.dalakoti.android.hellocompose.pathExamples.TicketWaveComposable
 
 private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        ScrollInternals()
+    }
+    add {
         AdvanceModifierDemo()
     }
     add {
