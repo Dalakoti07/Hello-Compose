@@ -1,9 +1,11 @@
 package com.dalakoti.android.hellocompose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -11,11 +13,14 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.with
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
@@ -23,16 +28,21 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dalakoti.android.hellocompose.appBar.AppBarDemo
 import com.dalakoti.android.hellocompose.examples.AnimationPager
 import com.dalakoti.android.hellocompose.awesome.WindowInfo
+import com.dalakoti.android.hellocompose.data.RecompositionDemo
 import com.dalakoti.android.hellocompose.examples.BasicExamples
+
+private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
@@ -78,7 +88,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -148,3 +157,4 @@ private fun HomePage(
         }
     }
 }
+
