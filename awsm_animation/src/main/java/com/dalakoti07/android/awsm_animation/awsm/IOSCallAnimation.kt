@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
@@ -33,7 +34,8 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 
 /**
- * Making infinite animation with help of infiniteRepeatable
+ * Making infinite animation with help of LaunchedEffect
+ * and Animatable type
  */
 @Preview
 @Composable
@@ -89,9 +91,9 @@ fun IosCallAnimation() {
     ) {
         Box(
             modifier = Modifier
-                .size(200.dp) // instead of this use 0.5f and 1f ratio
-//                .fillMaxWidth(0.55f)
-//                .aspectRatio(1f)
+//                .size(200.dp) // instead of this use 0.5f and 1f ratio
+                .fillMaxWidth(0.55f)
+                .aspectRatio(1f)
                 .background(
                     shape = CircleShape,
                     color = Color(0xFF002488),
@@ -104,9 +106,16 @@ fun IosCallAnimation() {
         ) {
             Box(
                 modifier = Modifier
-                    .size(100.dp)
-//                .fillMaxWidth(0.5f)
-//                .aspectRatio(1f)
+                    .fillMaxWidth(0.5f)
+                    .aspectRatio(1f)
+                    .shadow(
+                        elevation = 1.dp,
+                        shape = CircleShape,
+                        spotColor = if (scaleFactor.value > 2f) lightColor
+                            else Color(0xFF0125aa),
+                        ambientColor = if (scaleFactor.value > 2f) lightColor
+                            else Color(0xFF0125aa),
+                    )
                     .background(
                         shape = CircleShape,
                         color = if (scaleFactor.value > 2f) lightColor
@@ -123,7 +132,7 @@ fun IosCallAnimation() {
         ) {
             Text(
                 text = "Calling", color = Color.White, style = TextStyle(
-                    fontSize = 16.sp,
+                    fontSize = 20.sp,
                 )
             )
             (0..2).forEach { idx ->

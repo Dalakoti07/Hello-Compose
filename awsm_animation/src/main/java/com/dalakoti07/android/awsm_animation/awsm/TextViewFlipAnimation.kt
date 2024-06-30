@@ -1,6 +1,7 @@
 package com.dalakoti07.android.awsm_animation.awsm
 
 import android.util.Log
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.tween
@@ -110,10 +111,6 @@ fun TextViewFlipAnimation() {
     }
 }
 
-// todo fix this, the problem is that I want to start animating value from 0 to 1,
-//  on each index change, looks like update is good for this,
-//  I think u can use val animatedFloat = remember { Animatable(0f) },
-//  and then .animateTo
 /**
  * In Saurabh, firstly S would rotate, then A would rotate, then U,
  */
@@ -124,29 +121,29 @@ fun OneWordFlipAnimation() {
         mutableStateOf(listOf("S", "A", "U", "R", "A", "B", "H"))
     }
     var currentIndex by remember {
-        mutableIntStateOf(1)
+        mutableIntStateOf(0)
     }
     var isAnimationOn by remember {
         mutableStateOf(false)
     }
-    val animationAngle: Float by animateFloatAsState(
-        targetValue = if (isAnimationOn) 7f else 0f,
-        label = "animationAngle",
-        animationSpec = tween(durationMillis = animationTime * 7),
-        finishedListener = {
-            isAnimationOn = false
-            currentIndex = 1
-        }
-    )
+    val animationAngle = remember {
+        Animatable(0f)
+    }
     Log.d(TAG, "currentIdx $currentIndex; isAnimationOn $isAnimationOn; angle: $animationAngle")
     LaunchedEffect(
         key1 = isAnimationOn,
         block = {
             if (isAnimationOn) {
                 while (currentIndex != lettersArray.size) {
-                    delay(1000)
+                    animationAngle.animateTo(
+                        targetValue = 360f,
+                        animationSpec = tween(durationMillis = animationTime),
+                    )
                     currentIndex += 1
+                    animationAngle.snapTo(0f)
                 }
+                currentIndex = 0
+                isAnimationOn = false
             }
         },
     )
@@ -166,8 +163,8 @@ fun OneWordFlipAnimation() {
                     Text(
                         text = letter,
                         modifier = Modifier.graphicsLayer {
-                            if((idx + 1 == currentIndex) && isAnimationOn)
-                                rotationX = animationAngle * 360f
+                            if ((idx== currentIndex) && isAnimationOn)
+                                rotationX = animationAngle.value
                         },
                         style = TextStyle(
                             fontSize = 40.sp,
