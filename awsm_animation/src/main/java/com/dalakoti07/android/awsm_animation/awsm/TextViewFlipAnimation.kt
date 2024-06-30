@@ -111,7 +111,9 @@ fun TextViewFlipAnimation() {
 }
 
 // todo fix this, the problem is that I want to start animating value from 0 to 1,
-//  on each index change, looks like update is good for this
+//  on each index change, looks like update is good for this,
+//  I think u can use val animatedFloat = remember { Animatable(0f) },
+//  and then .animateTo
 /**
  * In Saurabh, firstly S would rotate, then A would rotate, then U,
  */
