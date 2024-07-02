@@ -112,6 +112,7 @@ fun TextViewFlipAnimation() {
 }
 
 /**
+ * Using Animatable does the trick here,
  * In Saurabh, firstly S would rotate, then A would rotate, then U,
  */
 @Composable
