@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.dalakoti07.android.awsm_animation.awsm.IosCallAnimation
+import com.dalakoti07.android.awsm_animation.awsm.LikeReaction
 import com.dalakoti07.android.awsm_animation.awsm.OneWordFlipAnimation
 import com.dalakoti07.android.awsm_animation.awsm.TextViewFlipAnimation
 import com.dalakoti07.android.awsm_animation.ui.theme.HelloComposeTheme
@@ -69,6 +70,9 @@ class AwsActivity : ComponentActivity() {
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
         IosCallAnimation()
+    }
+    add {
+        LikeReaction()
     }
     add {
         OneWordFlipAnimation()

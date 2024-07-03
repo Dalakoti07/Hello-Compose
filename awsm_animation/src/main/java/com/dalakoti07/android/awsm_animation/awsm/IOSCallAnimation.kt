@@ -5,8 +5,11 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,10 +30,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dalakoti07.android.awsm_animation.R
 import kotlinx.coroutines.delay
 
 /**
@@ -51,7 +56,7 @@ fun IosCallAnimation() {
     }
     val lightColor by remember {
         mutableStateOf(
-            Color(0xFF0125aa).copy(
+            Color.White.copy(
                 alpha = 0.1f
             )
         )
@@ -81,13 +86,17 @@ fun IosCallAnimation() {
             }
         },
     )
-    Box(
+    // todo add circle clipped image at center rather than
+    //  just TEXT/nothing,
+    //  use image kath.png
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                color = Color.White,
+                color = Color.Black,
             ),
-        contentAlignment = Alignment.Center,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(
             modifier = Modifier
@@ -112,9 +121,9 @@ fun IosCallAnimation() {
                         elevation = 1.dp,
                         shape = CircleShape,
                         spotColor = if (scaleFactor.value > 2f) lightColor
-                            else Color(0xFF0125aa),
+                        else Color(0xFF0125aa),
                         ambientColor = if (scaleFactor.value > 2f) lightColor
-                            else Color(0xFF0125aa),
+                        else Color(0xFF0125aa),
                     )
                     .background(
                         shape = CircleShape,
@@ -126,12 +135,14 @@ fun IosCallAnimation() {
 
             }
         }
-
         Row(
+            modifier = Modifier.padding(
+                top = 40.dp,
+            ),
             verticalAlignment = Alignment.Bottom,
         ) {
             Text(
-                text = "Calling", color = Color.White, style = TextStyle(
+                text = "Kath Calling", color = Color.White, style = TextStyle(
                     fontSize = 20.sp,
                 )
             )
@@ -144,7 +155,7 @@ fun IosCallAnimation() {
                         )
                         .background(
                             color = if (selectedDot == idx) Color.White
-                            else Color(0xFF007bfe),
+                            else Color.Gray,
                             shape = CircleShape,
                         )
                         .size(4.dp)

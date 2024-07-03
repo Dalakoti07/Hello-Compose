@@ -168,7 +168,7 @@ fun OneWordFlipAnimation() {
                                 rotationX = animationAngle.value
                         },
                         style = TextStyle(
-                            fontSize = 40.sp,
+                            fontSize = 50.sp,
                         ),
                     )
                 }
