@@ -1,4 +1,4 @@
-package com.dalakoti.android.hellocompose.basics
+package com.dalakoti07.android.coding_math.examples
 
 import android.util.Log
 import androidx.compose.foundation.Canvas

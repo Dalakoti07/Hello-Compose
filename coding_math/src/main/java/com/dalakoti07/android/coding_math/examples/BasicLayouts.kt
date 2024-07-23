@@ -1,4 +1,4 @@
-package com.dalakoti.android.hellocompose.basics
+package com.dalakoti07.android.coding_math.examples
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border

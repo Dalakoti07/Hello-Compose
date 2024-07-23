@@ -1,7 +1,6 @@
 package com.dalakoti.android.hellocompose.examples
 
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -49,19 +48,19 @@ private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
         PolygonPathExamples()
     }
     add {
-        CircularPathIllustration()
+        com.dalakoti07.android.coding_math.examples.CircularPathIllustration()
     }
     add {
-        BouncingBall()
+        com.dalakoti07.android.coding_math.examples.BouncingBall()
     }
     add {
-        SimpleSinWaveUsingDots()
+        com.dalakoti07.android.coding_math.examples.SimpleSinWaveUsingDots()
     }
     add {
-        SimpleSinWave()
+        com.dalakoti07.android.coding_math.examples.SimpleSinWave()
     }
     add{
-        BasicLineDraws()
+        com.dalakoti07.android.coding_math.examples.BasicLineDraws()
     }
 }
 
