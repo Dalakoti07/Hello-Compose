@@ -23,6 +23,8 @@ import androidx.compose.ui.graphics.Color
 import com.dalakoti07.android.coding_math.examples.BasicLineDraws
 import com.dalakoti07.android.coding_math.examples.BouncingBall
 import com.dalakoti07.android.coding_math.examples.CircularPathIllustration
+import com.dalakoti07.android.coding_math.examples.DrawCirclesInCircularPath
+import com.dalakoti07.android.coding_math.examples.EllipticalPath
 import com.dalakoti07.android.coding_math.examples.SimpleSinWave
 
 class CMActivity : ComponentActivity() {
@@ -68,6 +70,12 @@ class CMActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add{
+        EllipticalPath()
+    }
+    add{
+        DrawCirclesInCircularPath()
+    }
     add {
         CircularPathIllustration()
     }
