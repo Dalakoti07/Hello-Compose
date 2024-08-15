@@ -4,6 +4,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlin.math.sqrt
 import kotlin.random.Random
 
 data class Particle(
@@ -11,9 +12,38 @@ data class Particle(
     val velocity: Offset,
     val color: Color = Color.Black,
     val size: Float = 10f,
-)
+) {
+    /**
+     * Returns new position when every new 1ms is passed,
+     * no gravity influence
+     */
+    fun newPosition(): Particle {
+        return this.copy(
+            position = position + Offset(
+                velocity.x * (1f/1000),
+                velocity.y * (1f/1000)
+            )
+        )
+    }
 
-private const val maxSpeed = 200
+    /**
+     * Same as [newPosition] but under the influence of gravity,
+     * given that gravity is 9.8 m/sec^2
+     */
+    fun newPositionUnderGravity(): Particle {
+        val newVelocity = velocity + Offset(
+            x = 0f,
+            y = 9.8f,
+        )
+        return this.copy(
+            velocity = newVelocity,
+            position = position + newVelocity* (1f/1000)
+        )
+    }
+
+}
+
+private const val maxSpeed = 2000
 
 fun initializeParticles(centerX: Float, centerY: Float, count: Int): List<Particle> {
     return List(count) {

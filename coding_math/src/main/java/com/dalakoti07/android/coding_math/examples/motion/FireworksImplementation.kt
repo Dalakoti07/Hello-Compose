@@ -11,25 +11,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.withFrameMillis
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.dalakoti07.android.coding_math.examples.dpToPx
 
-private const val TAG = "ParticlesScatterOut"
+private const val TAG = "FireworksImplementation"
 
 @Composable
-fun ParticleSystem(modifier: Modifier = Modifier) {
+fun FireWorks(
+    modifier: Modifier,
+) {
     val particles = remember { mutableStateListOf<Particle>() }
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp.dpToPx()
     val screenWidth = configuration.screenWidthDp.dp.dpToPx()
 
     val centerX = screenWidth / 2
-    val centerY = screenHeight / 2
+    // start at 1/3rd
+    val centerY = screenHeight / 3
 
     Log.d(TAG, "ParticleSystem centerX $centerX and centerY $centerY")
-    ParticleMotionSimulator(
+    FireWorksSimulator(
         particles,
         centerX.toInt(),
         centerY.toInt(),
@@ -40,7 +42,7 @@ fun ParticleSystem(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ParticleMotionSimulator(
+fun FireWorksSimulator(
     particles: SnapshotStateList<Particle>,
     centerX: Int,
     centerY: Int,
@@ -60,7 +62,7 @@ fun ParticleMotionSimulator(
             if(particles.isEmpty()) return@LaunchedEffect
             withFrameMillis { _ ->
                 val newList = particles.map { particle ->
-                    particle.newPosition()
+                    particle.newPositionUnderGravity()
                 }
                 val filtered = newList.filter {
                     (it.position.x in 0f.. screenWidth) &&
@@ -84,4 +86,3 @@ fun ParticleMotionSimulator(
         }
     }
 }
-
