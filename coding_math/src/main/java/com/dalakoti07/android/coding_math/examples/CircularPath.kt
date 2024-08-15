@@ -128,6 +128,13 @@ fun DrawCirclesInCircularPath() {
             angleDifference = 10,
             size = 150.dp,
         )
+        Text(
+            text = "3 circles using trignometry", color = Color.White,
+            modifier = Modifier
+                .align(
+                    Alignment.BottomCenter,
+                ),
+        )
     }
 
 }

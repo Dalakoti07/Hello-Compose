@@ -26,6 +26,7 @@ import com.dalakoti07.android.coding_math.examples.CircularPathIllustration
 import com.dalakoti07.android.coding_math.examples.DrawCirclesInCircularPath
 import com.dalakoti07.android.coding_math.examples.EllipticalPath
 import com.dalakoti07.android.coding_math.examples.SimpleSinWave
+import com.dalakoti07.android.coding_math.examples.motion.ParticleSystem
 import com.dalakoti07.android.coding_math.examples.touch.CircularPathNDragIllustration
 import com.dalakoti07.android.coding_math.examples.touch.DragGestureExample
 
@@ -72,6 +73,11 @@ class CMActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        ParticleSystem(
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
     add {
         CircularPathNDragIllustration()
     }
