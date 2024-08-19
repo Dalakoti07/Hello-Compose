@@ -65,8 +65,7 @@ fun FireWorksSimulator(
                     particle.newPositionUnderGravity()
                 }
                 val filtered = newList.filter {
-                    (it.position.x in 0f.. screenWidth) &&
-                            (it.position.y in 0f .. screenHeight)
+                    it.isWithInBounds(screenWidth, screenHeight)
                 }
                 particles.clear()
                 particles.addAll(filtered)

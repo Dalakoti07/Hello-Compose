@@ -14,6 +14,14 @@ data class Particle(
     val size: Float = 10f,
 ) {
     /**
+     * returns boolean to tell if screen within bound
+     */
+    fun isWithInBounds(screenWidth: Float, screenHeight: Float): Boolean{
+        return (position.x in 0f.. screenWidth) &&
+                (position.y in 0f .. screenHeight)
+    }
+
+    /**
      * Returns new position when every new 1ms is passed,
      * no gravity influence
      */
@@ -34,6 +42,20 @@ data class Particle(
         val newVelocity = velocity + Offset(
             x = 0f,
             y = 9.8f,
+        )
+        return this.copy(
+            velocity = newVelocity,
+            position = position + newVelocity* (1f/1000)
+        )
+    }
+
+    /**
+     * What would the
+     */
+    fun newPositionUnderAcceleration(acceleration: Offset): Particle{
+        val newVelocity = velocity + Offset(
+            x = acceleration.x,
+            y = acceleration.y,
         )
         return this.copy(
             velocity = newVelocity,

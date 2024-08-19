@@ -28,6 +28,7 @@ import com.dalakoti07.android.coding_math.examples.EllipticalPath
 import com.dalakoti07.android.coding_math.examples.SimpleSinWave
 import com.dalakoti07.android.coding_math.examples.motion.FireWorks
 import com.dalakoti07.android.coding_math.examples.motion.ParticleSystem
+import com.dalakoti07.android.coding_math.examples.motion.UnderForceDemonstration
 import com.dalakoti07.android.coding_math.examples.touch.CircularPathNDragIllustration
 import com.dalakoti07.android.coding_math.examples.touch.DragGestureExample
 
@@ -74,6 +75,11 @@ class CMActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        UnderForceDemonstration(
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
     add {
         FireWorks(
             modifier = Modifier.fillMaxSize(),
