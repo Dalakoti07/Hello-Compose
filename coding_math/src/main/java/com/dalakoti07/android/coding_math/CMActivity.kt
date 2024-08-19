@@ -29,6 +29,7 @@ import com.dalakoti07.android.coding_math.examples.SimpleSinWave
 import com.dalakoti07.android.coding_math.examples.motion.FireWorks
 import com.dalakoti07.android.coding_math.examples.motion.ParticleSystem
 import com.dalakoti07.android.coding_math.examples.motion.UnderForceDemonstration
+import com.dalakoti07.android.coding_math.examples.solar.EarthAroundSun
 import com.dalakoti07.android.coding_math.examples.touch.CircularPathNDragIllustration
 import com.dalakoti07.android.coding_math.examples.touch.DragGestureExample
 
@@ -75,6 +76,11 @@ class CMActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        EarthAroundSun(
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
     add {
         UnderForceDemonstration(
             modifier = Modifier.fillMaxSize(),

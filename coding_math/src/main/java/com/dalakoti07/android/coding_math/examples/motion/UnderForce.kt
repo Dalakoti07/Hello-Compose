@@ -24,7 +24,7 @@ private fun createParticleToThis(
     color: Color,
 ): Particle {
     val angle = 0f
-    val speed = 1100
+    val speed = 1500
     val velocity = Offset(
         x = cos(angle) * speed,
         y = sin(angle) * speed
@@ -66,7 +66,7 @@ fun UnderForceDemonstration(
                 particleUnderDemo2 = particleUnderDemo2?.newPositionUnderAcceleration(
                     Offset(
                         x = 1.5f,
-                        y = 2f,
+                        y = 8f,
                     )
                 )
             }
