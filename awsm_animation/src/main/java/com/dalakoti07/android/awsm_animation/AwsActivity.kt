@@ -69,8 +69,9 @@ class AwsActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
-    add {
 
+    add {
+        HueRotationExample()
     }
     add {
         IosCallAnimation()
