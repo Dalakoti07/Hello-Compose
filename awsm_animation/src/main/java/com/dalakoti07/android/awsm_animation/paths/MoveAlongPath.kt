@@ -32,7 +32,7 @@ fun MoveAlongPathExample() {
                             color = Color.Red,
                         )
                 )
-            }
+            },
         )
         RevolvingShapesAroundTriangle(
             modifier = Modifier.padding(
@@ -40,5 +40,6 @@ fun MoveAlongPathExample() {
             ),
             title = "Triangle",
         )
+        HeartPathAnimation()
     }
 }
