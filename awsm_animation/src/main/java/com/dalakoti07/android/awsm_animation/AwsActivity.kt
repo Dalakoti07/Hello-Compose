@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import com.dalakoti07.android.awsm_animation.awsm.HueRotationExample
 import com.dalakoti07.android.awsm_animation.awsm.IosCallAnimation
 import com.dalakoti07.android.awsm_animation.awsm.LikeReaction
-import com.dalakoti07.android.awsm_animation.awsm.MoveAlongPathExample
+import com.dalakoti07.android.awsm_animation.paths.MoveAlongPathExample
 import com.dalakoti07.android.awsm_animation.awsm.OneWordFlipAnimation
 import com.dalakoti07.android.awsm_animation.awsm.TextViewFlipAnimation
 import com.dalakoti07.android.awsm_animation.ui.theme.HelloComposeTheme

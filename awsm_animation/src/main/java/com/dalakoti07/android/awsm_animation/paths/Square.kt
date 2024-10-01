@@ -1,4 +1,4 @@
-package com.dalakoti07.android.awsm_animation.awsm
+package com.dalakoti07.android.awsm_animation.paths
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -6,61 +6,25 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlin.math.min
-
-/**
- * Make a dash moving along Triangular path, square path, heart path
- */
-@Preview
-@Composable
-fun MoveAlongPathExample() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-
-        RevolvingShapesAroundSquare(
-            modifier = Modifier.padding(
-                bottom = 20.dp,
-            ),
-            title = "Square Path",
-            shape = {
-                Box(
-                    modifier = Modifier
-                        .size(10.dp)
-                        .background(
-                            color = Color.Red,
-                        )
-                )
-            }
-        )
-        RevolvingShapesAroundSquare(
-            modifier = Modifier.padding(
-                top = 20.dp,
-            ),
-
-        )
-    }
-}
 
 @Composable
 fun RevolvingShapesAroundSquare(
@@ -120,6 +84,9 @@ fun RevolvingShapesAroundSquare(
     }
 }
 
+/**
+ * This is the crux of the solution, defining x,y depending upon progress
+ */
 private fun drawRevolvingShape(progress: Float, squareSize: Float, center: Offset): Offset {
     // Total perimeter of the square (4 sides)
     val perimeter = squareSize * 4
