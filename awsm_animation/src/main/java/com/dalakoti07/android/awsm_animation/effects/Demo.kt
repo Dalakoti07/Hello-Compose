@@ -1,6 +1,7 @@
 package com.dalakoti07.android.awsm_animation.effects
 
 import android.util.Log
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Ease
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseInOut
@@ -72,6 +73,13 @@ fun BallWithEasing(easingType: String, duration: Int, maxWidth: Dp) {
         "EaseOut" -> tween<Dp>(durationMillis = duration, easing = EaseOut)
         else -> tween<Dp>(durationMillis = duration, easing = EaseInOut)
     }
+    val colorEasing = when (easingType) {
+        "Linear" -> tween<Color>(durationMillis = duration, easing = LinearEasing)
+        "EaseIn" -> tween<Color>(durationMillis = duration, easing = EaseIn)
+        "Ease" -> tween<Color>(durationMillis = duration, easing = Ease)
+        "EaseOut" -> tween<Color>(durationMillis = duration, easing = EaseOut)
+        else -> tween<Color>(durationMillis = duration, easing = EaseInOut)
+    }
 
     LaunchedEffect(
         key1 = Unit,
@@ -85,6 +93,11 @@ fun BallWithEasing(easingType: String, duration: Int, maxWidth: Dp) {
                 delay(1000)
             }
         },
+    )
+    val animatedColor by animateColorAsState(
+        targetValue = if (startAnimation) Color.Red else Color.Blue,
+        label = "animatedColor",
+        animationSpec = colorEasing,
     )
 
     val offsetX by animateDpAsState(
@@ -108,7 +121,7 @@ fun BallWithEasing(easingType: String, duration: Int, maxWidth: Dp) {
                 modifier = Modifier
                     .offset(x = offsetX)
                     .size(50.dp)
-                    .background(Color.Blue, shape = CircleShape)
+                    .background(animatedColor, shape = CircleShape)
             )
         }
     }
