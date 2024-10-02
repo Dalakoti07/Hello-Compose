@@ -26,6 +26,7 @@ import com.dalakoti07.android.awsm_animation.paths.MoveAlongPathExample
 import com.dalakoti07.android.awsm_animation.awsm.OneWordFlipAnimation
 import com.dalakoti07.android.awsm_animation.awsm.TextViewFlipAnimation
 import com.dalakoti07.android.awsm_animation.effects.AllEasingEffects
+import com.dalakoti07.android.awsm_animation.effects.ConcentricProgressBar
 import com.dalakoti07.android.awsm_animation.effects.EmojiBounce
 import com.dalakoti07.android.awsm_animation.ui.theme.HelloComposeTheme
 
@@ -72,6 +73,9 @@ class AwsActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        ConcentricProgressBar()
+    }
     add {
         EmojiBounce()
     }
