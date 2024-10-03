@@ -30,10 +30,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dalakoti07.android.awsm_animation.R
 
 @Preview
 @Composable
@@ -100,11 +102,18 @@ fun CallPicker(
                 shape = RoundedCornerShape(20.dp),
             )
             .padding(
-                vertical = 10.dp,
+                vertical = 15.dp,
                 horizontal = 20.dp,
             ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        Icon(
+            painter = painterResource(R.drawable.ic_mic),
+            contentDescription = "",
+            tint = Color(0xFF90443a),
+            modifier = Modifier
+                .size(36.dp)
+        )
         Spacer(
             modifier = Modifier.weight(1f),
         )
@@ -122,12 +131,12 @@ fun CallPicker(
                     label = "iconSize",
                     finishedListener = {
                         if(idx == 0){
-                            isAnimating = false
+                            isAnimating = !isAnimating
                         }
                     },
                 )
                 val letterColoring by animateColorAsState(
-                    targetValue = if(isAnimating) Color(0xFF90443a) else Color.White,
+                    targetValue = if(isAnimating) Color(0xFF90443a) else Color(0xFF266fc4),
                     animationSpec = tween(
                         durationMillis = 30,
                         easing = LinearEasing,
@@ -154,18 +163,27 @@ fun CallPicker(
             tint = Color.White,
             modifier = Modifier
                 .padding(
-                    end = 40.dp,
-                    start = 20.dp,
+                    end = 20.dp,
+                    start = 10.dp,
                 )
                 .offset(
-                    x = iconOffset,
+                    x = if(isAnimating) iconOffset else 0.dp,
                 )
                 .size(
-                    36.dp,
+                    24.dp,
                 ).graphicsLayer {
-                    scaleX = iconScaling
-                    scaleY = iconScaling
+                    if(isAnimating){
+                        scaleX = iconScaling
+                        scaleY = iconScaling
+                    }
                 },
+        )
+        Icon(
+            painter = painterResource(R.drawable.ic_mic),
+            contentDescription = "",
+            tint = Color(0xFF266fc4),
+            modifier = Modifier
+                .size(36.dp)
         )
     }
 }
