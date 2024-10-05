@@ -47,21 +47,6 @@ private val allExamples = mutableListOf<@Composable () -> Unit>().apply {
     add {
         PolygonPathExamples()
     }
-    add {
-        com.dalakoti07.android.coding_math.examples.CircularPathIllustration()
-    }
-    add {
-        com.dalakoti07.android.coding_math.examples.BouncingBall()
-    }
-    add {
-        com.dalakoti07.android.coding_math.examples.SimpleSinWaveUsingDots()
-    }
-    add {
-        com.dalakoti07.android.coding_math.examples.SimpleSinWave()
-    }
-    add{
-        com.dalakoti07.android.coding_math.examples.BasicLineDraws()
-    }
 }
 
 

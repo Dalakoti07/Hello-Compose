@@ -13,12 +13,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.dalakoti.android.hellocompose.awesome.LocalWindow
-import com.dalakoti07.android.coding_math.examples.dpToPx
 
 private const val TAG = "PolygonPathExample"
+
+@Composable
+fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
+
 
 fun createPath(sides: Int, radius: Float, cx: Float, cy: Float): Path {
     val path = Path()

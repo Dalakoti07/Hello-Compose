@@ -26,6 +26,7 @@ import com.dalakoti07.android.awsm_animation.awsm.LikeReaction
 import com.dalakoti07.android.awsm_animation.paths.MoveAlongPathExample
 import com.dalakoti07.android.awsm_animation.awsm.OneWordFlipAnimation
 import com.dalakoti07.android.awsm_animation.awsm.ReceivingCall
+import com.dalakoti07.android.awsm_animation.awsm.TextAnimationExample
 import com.dalakoti07.android.awsm_animation.awsm.TextViewFlipAnimation
 import com.dalakoti07.android.awsm_animation.effects.AllEasingEffects
 import com.dalakoti07.android.awsm_animation.effects.ConcentricProgressBar
@@ -76,6 +77,9 @@ class AwsActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        TextAnimationExample()
+    }
     add {
         ReceivingCall()
     }
