@@ -42,6 +42,18 @@ fun CustomLayoutExamples() {
                 .background(Color(0xFFFFE0B2))
                 .padding(8.dp)
         )
+        Text(
+            text = "Four",
+            modifier = Modifier
+                .background(Color(0xFFD0F0C0))
+                .padding(8.dp)
+        )
+        Text(
+            text = "Five",
+            modifier = Modifier
+                .background(Color(0xFFFFE0B2))
+                .padding(8.dp)
+        )
     }
 }
 
@@ -78,6 +90,7 @@ fun CustomColumn(
             spacingPx * (placeables.size - 1).coerceAtLeast(0)
 
         val height = rawHeight.coerceIn(constraints.minHeight, constraints.maxHeight)
+        Log.d(TAG, "CustomColumn: rawHeight $rawHeight maxHeight ${constraints.maxHeight} height $height")
 
         layout(width, height) {
             var yPosition = 0
@@ -90,7 +103,7 @@ fun CustomColumn(
                     else -> 0
                 }
 
-                placeable.placeRelative(x, yPosition)
+                placeable.placeRelative(x + (index)*100, yPosition)
 
                 yPosition += placeable.height
                 if (index != placeables.lastIndex) yPosition += spacingPx
