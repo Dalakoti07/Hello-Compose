@@ -4,6 +4,7 @@ package com.dalakoti.android.hellocompose.customLayout
 
 // Visual helpers for the demo content
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
@@ -63,15 +64,14 @@ fun WeightedCustomColumnExample(){
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(Color(0xFFF0F0F0))
-            .height(240.dp),
+            .fillMaxHeight(),
         spacing = 8.dp
     ) {
         // A fixed-height child centered horizontally
         Text(
             text = "Header (fixed)",
             modifier = Modifier
-                .background(Color(0xFFBBDEFB))
+                .background(Color(0xFFF89A14))
                 .padding(8.dp)
                 .customColumnAlign(Alignment.CenterHorizontally)
         )
@@ -81,7 +81,7 @@ fun WeightedCustomColumnExample(){
             text = "Weighted 1x",
             modifier = Modifier
                 .customColumnWeight(1f)
-                .background(Color(0xFFC8E6C9))
+                .background(Color(0xFF12E819))
                 .padding(8.dp)
         )
 
@@ -91,7 +91,7 @@ fun WeightedCustomColumnExample(){
             modifier = Modifier
                 .customColumnWeight(2f)
                 .customColumnAlign(Alignment.End)
-                .background(Color(0xFFFFF9C4))
+                .background(Color(0xFF7D40E5))
                 .padding(8.dp)
         )
 
@@ -99,7 +99,7 @@ fun WeightedCustomColumnExample(){
         Text(
             text = "Footer (fixed)",
             modifier = Modifier
-                .background(Color(0xFFFFCCBC))
+                .background(Color(0xFFFC6133))
                 .padding(8.dp)
         )
     }
@@ -147,7 +147,7 @@ fun WeightedCustomColumn(
             val h: Float = if (totalWeight == 0f) 0f else (remainingHeight * (w / totalWeight))
             m.measure(
                 constraints.copy(
-                    minHeight = 0,
+                    minHeight = h.coerceAtLeast(0f).toInt(),
                     maxHeight = h.coerceAtLeast(0f).toInt()
                 )
             )
