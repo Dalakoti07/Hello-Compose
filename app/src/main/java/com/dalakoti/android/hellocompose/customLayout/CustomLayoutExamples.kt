@@ -1,113 +1,66 @@
 package com.dalakoti.android.hellocompose.customLayout
 
-import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 
-private const val TAG = "CustomLayoutExamples"
+
+private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    add {
+        WeightedCustomColumnExample()
+    }
+    add {
+        CustomColumnExample()
+    }
+}
 
 @Composable
 fun CustomLayoutExamples() {
-    CustomColumn(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalSpacing = 12.dp,
+    var currentAnimation by remember {
+        mutableStateOf(0)
+    }
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        Text(
-            text = "One",
-            modifier = Modifier
-                .background(Color(0xFFEFEFEF))
-                .padding(8.dp)
-        )
-        Text(
-            text = "Two — a longer item",
-            modifier = Modifier
-                .background(Color(0xFFD0F0C0))
-                .padding(8.dp)
-        )
-        Text(
-            text = "Three",
-            modifier = Modifier
-                .background(Color(0xFFFFE0B2))
-                .padding(8.dp)
-        )
-        Text(
-            text = "Four",
-            modifier = Modifier
-                .background(Color(0xFFD0F0C0))
-                .padding(8.dp)
-        )
-        Text(
-            text = "Five",
-            modifier = Modifier
-                .background(Color(0xFFFFE0B2))
-                .padding(8.dp)
-        )
-    }
-}
-
-@Composable
-fun CustomColumn(
-    modifier: Modifier = Modifier,
-    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    verticalSpacing: Dp = 0.dp,
-    content: @Composable () -> Unit,
-) {
-    Layout(
-        modifier = modifier,
-        content = content,
-    ) { measurables, constraints ->
-        Log.d(TAG, "CustomColumn: $measurables $constraints")
-        val spacingPx = verticalSpacing.roundToPx()
-
-        // Measure children with flexible height
-        val placeables = measurables.map { measurable ->
-            Log.d(TAG, "CustomColumn: $measurable")
-            measurable.measure(constraints.copy(minHeight = 0))
-        }
-        Log.d(TAG, "placecables $placeables")
-
-        val contentWidth = placeables.maxOfOrNull { it.width } ?: 0
-
-        val width = if (constraints.hasBoundedWidth) {
-            constraints.maxWidth
-        } else {
-            contentWidth.coerceIn(constraints.minWidth, constraints.maxWidth)
+        allAnimations[currentAnimation].invoke()
+        IconButton(
+            onClick =
+                {
+                    if (currentAnimation > 0) {
+                        currentAnimation = currentAnimation.dec()
+                    }
+                }, modifier = Modifier
+                .align(Alignment.CenterStart)
+                .background(Color.White.copy(alpha = 0.4f), shape = CircleShape)
+        ) {
+            Icon(Icons.Default.ArrowBack, contentDescription = null)
         }
 
-        val rawHeight = placeables.sumOf { it.height } +
-            spacingPx * (placeables.size - 1).coerceAtLeast(0)
-
-        val height = rawHeight.coerceIn(constraints.minHeight, constraints.maxHeight)
-        Log.d(TAG, "CustomColumn: rawHeight $rawHeight maxHeight ${constraints.maxHeight} height $height")
-
-        layout(width, height) {
-            var yPosition = 0
-
-            placeables.forEachIndexed { index, placeable ->
-                val x = when (horizontalAlignment) {
-                    Alignment.Start -> 0
-                    Alignment.CenterHorizontally -> (width - placeable.width) / 2
-                    Alignment.End -> width - placeable.width
-                    else -> 0
+        IconButton(
+            onClick = {
+                if (currentAnimation < allAnimations.size.minus(1)) {
+                    currentAnimation = currentAnimation.inc()
                 }
-
-                placeable.placeRelative(x + (index)*100, yPosition)
-
-                yPosition += placeable.height
-                if (index != placeables.lastIndex) yPosition += spacingPx
-            }
+            }, modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .background(Color.White.copy(alpha = 0.4f), shape = CircleShape)
+        ) {
+            Icon(Icons.Default.ArrowForward, contentDescription = null)
         }
     }
 }
+
