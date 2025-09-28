@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.lifecycle.ViewModel
 import com.dalakoti07.android.awsm_animation.awsm.HueRotationExample
 import com.dalakoti07.android.awsm_animation.awsm.IosCallAnimation
 import com.dalakoti07.android.awsm_animation.awsm.LikeReaction
@@ -77,6 +78,9 @@ class AwsActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    // start from 32 lecture,
+    // how to animate dashes along a path in compose, because that
+    // looks out of box in swift UI
     add {
         TextAnimationExample()
     }
