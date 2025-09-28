@@ -39,6 +39,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dalakoti.android.hellocompose.appBar.AppBarDemo
 import com.dalakoti.android.hellocompose.examples.AnimationPager
 import com.dalakoti.android.hellocompose.awesome.WindowInfo
+import com.dalakoti.android.hellocompose.customLayout.CustomLayoutExamples
 import com.dalakoti.android.hellocompose.data.RecompositionDemo
 import com.dalakoti.android.hellocompose.examples.BasicExamples
 
@@ -62,7 +63,13 @@ class MainActivity : ComponentActivity() {
                         appBarStuffClick = {
                             navController.navigate("appbar")
                         },
+                        onCustomLayout = {
+                            navController.navigate("customLayout")
+                        }
                     )
+                }
+                composable("customLayout"){
+                    CustomLayoutExamples()
                 }
                 composable("basics") {
                     BasicExamples()
@@ -95,6 +102,7 @@ private fun HomePage(
     onBasicClick: () -> Unit = {},
     onAnimationClick: () -> Unit = {},
     appBarStuffClick: () -> Unit = {},
+    onCustomLayout: () -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -148,6 +156,22 @@ private fun HomePage(
             ) {
                 Text(
                     text = "AppBar",
+                    modifier = Modifier.padding(
+                        6.dp,
+                    ),
+                    fontSize = 20.sp,
+                )
+            }
+            Card(
+                modifier = Modifier
+                    .padding(6.dp)
+                    .fillMaxWidth(),
+                onClick = {
+                    onCustomLayout()
+                }
+            ) {
+                Text(
+                    text = "Custom Layout",
                     modifier = Modifier.padding(
                         6.dp,
                     ),
