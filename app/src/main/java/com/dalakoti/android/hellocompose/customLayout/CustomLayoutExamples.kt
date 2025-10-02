@@ -21,6 +21,9 @@ import androidx.compose.ui.graphics.Color
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
     add {
+        ThreeDCubesExample()
+    }
+    add {
         WeightedCustomColumnExample()
     }
     add {
