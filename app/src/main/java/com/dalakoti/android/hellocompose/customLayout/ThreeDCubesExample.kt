@@ -1,5 +1,7 @@
 package com.dalakoti.android.hellocompose.customLayout
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -7,7 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -15,17 +19,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ThreeDCubesExample(
+fun ThreeDCubeBarChart(
     modifier: Modifier = Modifier,
-    values: List<Int> = listOf(3, 5, 2, 6, 4),
+    values: List<Int>,
     cubeSize: Dp = 28.dp,
     depthFraction: Float = 0.35f,
-    gap: Dp = 1.dp,
+    gap: Dp = 8.dp,
+    labelGap: Dp = 5.dp,
+    animate: Boolean = true,
+    colorForValue: (value: Int, max: Int) -> Color = { v, m -> barGreenFor(v, m) },
 ) {
     val maxStack = (values.maxOrNull() ?: 0).coerceAtLeast(1)
     val depth = cubeSize * depthFraction
@@ -38,6 +47,14 @@ fun ThreeDCubesExample(
         verticalAlignment = Alignment.Bottom,
     ) {
         values.forEachIndexed { index, count ->
+            val target = if (animate) 1f else 1f
+            val progress by animateFloatAsState(
+                targetValue = target,
+                animationSpec = tween(durationMillis = 900, delayMillis = if (animate) index * 120 else 0)
+            )
+            // Effective bar height from bottom to top face of the top cube:
+            val stackHeight = cubeSize + depth * count
+            val barColor = colorForValue(count, maxStack)
             // Each bar: stack of cubes bottom-aligned. We offset each cube up by depth per layer
             Box(
                 modifier = Modifier
@@ -45,17 +62,56 @@ fun ThreeDCubesExample(
                     .height(barHeight),
                 contentAlignment = Alignment.BottomCenter
             ) {
-                repeat(count) { layer ->
-                    Cube3D(
-                        size = cubeSize,
-                        depthFraction = depthFraction,
-                        baseColor = pickBarColor(index),
-                        modifier = Modifier.offset(y = -depth * layer)
-                    )
+                // Scale from bottom to animate height growth
+                Box(
+                    modifier = Modifier
+                        .graphicsLayer(
+                            transformOrigin = TransformOrigin(0.5f, 1f),
+                            scaleY = progress
+                        ),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
+                    repeat(count) { layer ->
+                        Cube3D(
+                            size = cubeSize,
+                            depthFraction = depthFraction,
+                            baseColor = barColor,
+                            modifier = Modifier.offset(y = -depth * layer)
+                        )
+                    }
                 }
+
+                // Label hovering above current bar
+                Text(
+                    text = count.toString(),
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .offset(y = -stackHeight - labelGap),
+                    color = Color(0xFF1B5E20)
+                )
             }
         }
     }
+}
+
+@Composable
+fun ThreeDCubesExample(
+    modifier: Modifier = Modifier,
+    values: List<Int> = listOf(3, 5, 2, 6, 4),
+    cubeSize: Dp = 28.dp,
+    depthFraction: Float = 0.35f,
+    gap: Dp = 1.dp,
+) {
+    ThreeDCubeBarChart(
+        modifier = modifier,
+        values = values,
+        cubeSize = cubeSize,
+        depthFraction = depthFraction,
+        gap = gap,
+        labelGap = 5.dp,
+        animate = true,
+        colorForValue = { v, m -> barGreenFor(v, m) }
+    )
 }
 
 @Composable
@@ -121,16 +177,11 @@ private fun blendColors(a: Color, b: Color, t: Float): Color {
     return Color(r, g, bl, al)
 }
 
-private fun pickBarColor(index: Int): Color {
-    // Simple distinct palette
-    val palette = listOf(
-        Color(0xFF4FC3F7), // light blue
-        Color(0xFF81C784), // green
-        Color(0xFFFFB74D), // orange
-        Color(0xFFBA68C8), // purple
-        Color(0xFFE57373), // red
-    )
-    return palette[index % palette.size]
+private fun barGreenFor(value: Int, max: Int): Color {
+    val t = if (max <= 0) 0f else (value.toFloat() / max.toFloat()).coerceIn(0f, 1f)
+    val base = Color(0xFF4CAF50)
+    // Darken proportionally with height (taller = darker)
+    return blendColors(base, Color.Black, 0.35f * t)
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
