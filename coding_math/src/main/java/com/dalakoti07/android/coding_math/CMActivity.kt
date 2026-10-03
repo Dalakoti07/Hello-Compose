@@ -29,6 +29,8 @@ import com.dalakoti07.android.coding_math.examples.SimpleSinWave
 import com.dalakoti07.android.coding_math.examples.motion.FireWorks
 import com.dalakoti07.android.coding_math.examples.motion.ParticleSystem
 import com.dalakoti07.android.coding_math.examples.motion.UnderForceDemonstration
+import com.dalakoti07.android.coding_math.examples.shaders.GradientShader
+import com.dalakoti07.android.coding_math.examples.shaders.RedScreenShader
 import com.dalakoti07.android.coding_math.examples.solar.EarthAroundSun
 import com.dalakoti07.android.coding_math.examples.touch.CircularPathNDragIllustration
 import com.dalakoti07.android.coding_math.examples.touch.DragGestureExample
@@ -76,6 +78,18 @@ class CMActivity : ComponentActivity() {
 }
 
 private val allAnimations = mutableListOf<@Composable () -> Unit>().apply {
+    // ── W0, the shader-plan gate. First two entries so the gate is what launches.
+    //    Red screen, then a gradient, then stop. See shader/plan.md §11.
+    add {
+        RedScreenShader(
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
+    add {
+        GradientShader(
+            modifier = Modifier.fillMaxSize(),
+        )
+    }
     add {
         EarthAroundSun(
             modifier = Modifier.fillMaxSize(),
